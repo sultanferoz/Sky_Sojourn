@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 const Searchbox = ({ handleFetch }) => {
   const [city, setCity] = useState("");
 
@@ -10,22 +10,20 @@ const Searchbox = ({ handleFetch }) => {
 
   const handleClick = () => {
     handleFetch(city);
+    setCity(" ");
   };
   return (
-    <div className=" flex m-4 justify-center ">
+    <div className="flex flex-row">
       <input
         type="text"
-        placeholder="enter your city"
-        className=" rounded-lg p-2 "
+        placeholder="Search Location..."
+        className="w-full bg-transparent text-white placeholder-gray-300 p-2 focus:outline-none"
         value={city}
         onChange={handleChange}
       />
-      <button>
-        <FontAwesomeIcon
-          icon={faMagnifyingGlass}
-          size="2xl"
-          onClick={handleClick}
-        />
+
+      <button className="text-white ml-2">
+        <FontAwesomeIcon icon={faSearch} size="lg" onClick={handleClick} />
       </button>
     </div>
   );
