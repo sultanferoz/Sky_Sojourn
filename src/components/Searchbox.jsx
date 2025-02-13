@@ -10,7 +10,7 @@ const Searchbox = ({ handleFetch }) => {
 
   const handleClick = () => {
     handleFetch(city);
-    setCity(" ");
+    setCity("");
   };
   return (
     <div className="flex flex-row">

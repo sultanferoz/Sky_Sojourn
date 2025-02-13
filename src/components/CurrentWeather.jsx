@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { fetchWeatherData } from "../services/weatherService";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTemperatureHigh,
@@ -13,27 +14,6 @@ const WeatherApp = () => {
   const [city, setCity] = useState("Gilgit");
   const [data, setData] = useState(null);
   const [bgImage, setBgImage] = useState("../../public/images/lightning.jpg");
-
-  useEffect(() => {
-    const fetchWeather = async () => {
-      try {
-        const response = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?&units=metric&q=${city}&appid=3f2247de26d2429566d812c728926abe`
-        );
-        if (response.ok) {
-          const weatherData = await response.json();
-          setData(weatherData);
-          updateBackground(weatherData.weather[0]?.main.toLowerCase());
-        } else {
-          console.error("Error fetching weather data:", response.statusText);
-        }
-      } catch (error) {
-        console.error("Fetch error:", error);
-      }
-    };
-
-    if (city) fetchWeather();
-  }, [city]);
 
   const updateBackground = (condition, temp) => {
     if (condition.includes("rain")) {
@@ -51,9 +31,23 @@ const WeatherApp = () => {
     }
   };
 
-  const handleFetch = (newCity, condition, temp) => {
+  useEffect(() => {
+    const fetchWeather = async () => {
+      const weatherData = await fetchWeatherData(city);
+      if (weatherData) {
+        setData(weatherData);
+        updateBackground(
+          weatherData.weather[0]?.main.toLowerCase(),
+          weatherData.main?.temp
+        );
+      }
+    };
+
+    if (city) fetchWeather();
+  }, [city]);
+
+  const handleFetch = (newCity) => {
     setCity(newCity);
-    updateBackground(condition, temp);
   };
 
   return (

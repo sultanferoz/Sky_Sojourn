@@ -1,16 +1,12 @@
-// import Searchbox from "./components/Searchbox"
-
-import { LayoutCard } from "./components/LayoutCard"
-
+import React from "react";
+import WeatherApp from "./components/CurrentWeather";
 
 function App() {
- 
-
   return (
-    <>
-    <LayoutCard/>
-    </>
-  )
+    <div>
+      <WeatherApp />
+    </div>
+  );
 }
 
-export default App
+export default App;
