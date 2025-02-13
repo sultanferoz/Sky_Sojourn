@@ -17,17 +17,17 @@ const WeatherApp = () => {
 
   const updateBackground = (condition, temp) => {
     if (condition.includes("rain")) {
-      setBgImage("../../public/images/rain.jpg");
+      setBgImage("./images/rain.jpg");
     } else if (condition.includes("snow")) {
-      setBgImage("../../public/images/snow.jpg");
+      setBgImage("./images/snow.jpg");
     } else if (condition.includes("cloud")) {
       if (temp < 0) {
-        setBgImage("../../public/images/snow.jpg");
+        setBgImage("./images/snow.jpg");
       } else {
-        setBgImage("../../public/images/clouds.jpg");
+        setBgImage("./images/clouds.jpg");
       }
     } else {
-      setBgImage("../../public/images/sunnyday.jpg");
+      setBgImage("./images/sunnyday.jpg");
     }
   };
 
